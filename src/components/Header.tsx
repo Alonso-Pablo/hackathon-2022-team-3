@@ -1,9 +1,5 @@
-export function Header() {
-    return (
-        <header>
-            <ul>
-                <li></li>
-            </ul>
-        </header>
-    )
+import { ReactNode } from 'react'
+
+export function Header({ children }: { children: ReactNode }) {
+    return <header>{children}</header>
 }
