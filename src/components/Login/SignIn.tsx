@@ -29,7 +29,7 @@ function SignIn() {
 
   return (
     <div className="h-screen container bg-gainsboro m-auto text-black flex justify-center items-center antialiased">
-      <div className="md:w-1/2 border-2 border-gray-300 bg-gray-100 rounded-3xl px-6 py-10 hover:border-gray-500 transition duration-700 ease-in-out">
+      <div className="md:max-w-xl border-2 border-gray-300 bg-gray-100 rounded-3xl px-6 py-10 hover:border-gray-500 transition duration-700 ease-in-out">
         <h2 className="text-4xl font-bold text-center mb-5 text-blue-secondary tracking-wide">
           Log in
         </h2>

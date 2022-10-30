@@ -3,7 +3,6 @@ import homeAnimation from '../assets/home.json';
 import LogoutButton from '../components/Login/LogoutButton';
 
 function Home() {
-
   const options = {
     animationData: homeAnimation,
     loop: true,
