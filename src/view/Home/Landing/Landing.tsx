@@ -1,14 +1,12 @@
-import React from 'react';
+import { Card } from './Card'
 
-import { Card } from './Card';
-export interface LandingInterface { }
-
-const Landing: React.FC<LandingInterface> = () => {
-	return (
-
-		<Card />
-
-	);
-};
-
-export default Landing;
+export function Landing() {
+    return (
+        <>
+            <h2 className="subt__cat container__card1">
+                Elige una categoria de empleo
+            </h2>
+            <Card />
+        </>
+    )
+}
