@@ -1,29 +1,58 @@
-//@ts-nocheck
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAuth } from '../../context/AuthContext';
+import { RegisterOptions, useForm } from 'react-hook-form';
+
 import SignInGoogle from './SignInGoogle';
 
+import { Field, Button } from '@/components';
+
+import { Login } from '@/models';
+import { login } from '@/services';
+
+const EMAIL_VALIDATION: RegisterOptions<Login> = {
+  minLength: { value: 4, message: 'Password must be at least 4 characters' },
+  required: { value: true, message: 'Required field' },
+  pattern: {
+    value:
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+    message: 'Email must be valid',
+  },
+};
+
+const PASSWORD_VALIDATION: RegisterOptions<Login> = {
+  minLength: {
+    value: 8,
+    message: 'Password must be at least 8 characters',
+  },
+  required: {
+    value: true,
+    message: 'Required field',
+  },
+};
+
 function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { signIn } = UserAuth();
 
   const handleSignUp = () => {
     navigate('/signup');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<Login>({ mode: 'onTouched' });
+
+  const onSubmit = async ({ email, password }: Login) => {
     setError('');
     try {
-      await signIn(email, password);
+      await login(email, password);
       navigate('/');
     } catch (e) {
-      setError(e.message);
-      console.log(e.message);
+      /* console.log(e);
+      setError(e?.message);
+      console.log(e?.message); */
     }
   };
 
@@ -33,50 +62,47 @@ function SignIn() {
         <h2 className="text-4xl font-bold text-center mb-5 text-blue-secondary tracking-wide">
           Log in
         </h2>
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
           <span className="flex flex-col gap-2">
-            <label>Email:</label>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
+            <Field
+              text="Email:"
               type="email"
-              name="email"
               placeholder="Email"
-              id="register-email"
+              register={register('email', EMAIL_VALIDATION)}
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
             />
           </span>
           <span className="flex flex-col gap-2">
-            <label>Password:</label>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
+            <Field
+              text="Password:"
               type="password"
-              name="password"
               placeholder="Password"
-              id="register-password"
+              register={register('password', PASSWORD_VALIDATION)}
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
             />
           </span>
           <span className="flex flex-col divide-y-2 divide-gray-400 gap-4">
             <span>
-              <button
+              <Button
+                disabled={isSubmitting}
                 type="submit"
                 className="bg-blue-primary text-white px-4 py-2 rounded-lg hover:scale-105 transition duration-500 ease-in-out hover:bg-blue-secondary w-full"
               >
                 Login
-              </button>
+              </Button>
             </span>
             <span className="space-y-3 flex flex-col items-center">
-              {<SignInGoogle />}
+              <SignInGoogle />
             </span>
             <span>
               <p className="text-gray-500 text-center text-sm pt-2">
                 Don't have an account?{' '}
-                <button
+                <Button
                   onClick={handleSignUp}
                   className="underline hover:underline-offset-2 tracking-wider"
                 >
                   sign up
-                </button>
+                </Button>
               </p>
             </span>
           </span>
