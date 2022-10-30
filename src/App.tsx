@@ -4,26 +4,10 @@ import SignIn from './components/Login/SignIn';
 import Home from './views/Home';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import AppRouter from './routes/AppRouter';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-        </Routes>
-      </AuthContextProvider>
-    </BrowserRouter>
-  );
+  return <AppRouter />;
 }
 
 export default App;

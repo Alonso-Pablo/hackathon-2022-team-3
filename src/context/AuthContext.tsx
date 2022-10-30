@@ -14,7 +14,7 @@ import { auth } from '../services/firebase';
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -24,11 +24,11 @@ export const AuthContextProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-   const googleSignIn = () => {
-     const provider = new GoogleAuthProvider();
-      signInWithPopup(auth, provider);
-     //signInWithRedirect(auth, provider);
-   };
+  const googleSignIn = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider);
+    //signInWithRedirect(auth, provider);
+  };
 
   const logout = () => {
     return signOut(auth);
