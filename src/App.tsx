@@ -1,13 +1,11 @@
-import { Home } from './view/Home'
+import { BrowserRouter } from 'react-router-dom'
+import { Home } from '@/views/Home'
 
 function App() {
     return (
-        <>
-            <div>
-                <h1 className="bg-black text-white">Hola mundo</h1>
-            </div>
+        <BrowserRouter>
             <Home />
-        </>
+        </BrowserRouter>
     )
 }
 
