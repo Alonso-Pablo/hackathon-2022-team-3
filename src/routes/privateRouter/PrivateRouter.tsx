@@ -1,13 +1,13 @@
-//@ts-nocheck
-import React, { FunctionComponent } from 'react';
-import { Navigate } from 'react-router';
-import { UserAuth } from '../../context/AuthContext';
-import useFakeAuth from '../../hooks/useFakeAuth';
+import { FunctionComponent } from 'react';
+import { Navigate } from 'react-router-dom';
+
+import { useUser } from '@/store';
+
 type PrivateProps = {
   children: JSX.Element;
 };
 const PrivateRouter: FunctionComponent<PrivateProps> = ({ children }) => {
-  const { user } = UserAuth();
+  const { user } = useUser();
   console.log('user', user);
   return user ? children : <Navigate to="/signin" />;
 };

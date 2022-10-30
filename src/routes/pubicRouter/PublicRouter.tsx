@@ -1,13 +1,13 @@
-import React, { FunctionComponent } from 'react'
-import { Navigate } from 'react-router'
-import useFakeAuth from '../../hooks/useFakeAuth'
-type PublicProps = {
-    children: JSX.Element
+import { ReactNode } from 'react';
+import { Navigate } from 'react-router';
+
+import { useUser } from '@/store';
+
+interface Props {
+  children: ReactNode;
 }
 
-export const PublicRouter: FunctionComponent<PublicProps> = ({ children }) => {
-    const auth = useFakeAuth()
-    return auth.user ? <Navigate to="/" /> : children
-}
-
-export default PublicRouter
+export const PublicRouter = ({ children }: Props) => {
+  const { user } = useUser();
+  return user ? <Navigate to="/" /> : children;
+};
