@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination'
 
-import { Search } from '../Search'
+import { Search } from '@/components'
 import { QueryJob } from '@/models'
 import { getJobsByCategory } from '@/services'
 import { truncate } from '@/utilities'

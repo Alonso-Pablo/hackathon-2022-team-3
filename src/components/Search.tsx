@@ -5,7 +5,7 @@ interface Query {
     keyword: string
 }
 
-const Search = () => {
+export function Search() {
     const navigate = useNavigate()
 
     const onSubmit = ({ keyword }: Query) => {
@@ -38,5 +38,3 @@ const Search = () => {
         </form>
     )
 }
-
-export default Search

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { Category } from '@/models'
 import { getCategories } from '@/services'
 
-export function Card() {
+export function Cards() {
     const [category, setCategory] = useState<Category[]>([])
 
     useEffect(() => {
@@ -12,7 +12,7 @@ export function Card() {
     }, [])
 
     return (
-        <article className="container ">
+        <article className="container">
             {category.map((category) => {
                 return (
                     <Link

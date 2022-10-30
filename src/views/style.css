@@ -3,11 +3,9 @@
     padding: 0;
 }
 
-body {
+/* body {
     width: 100vw;
-}
-
-
+} */
 
 .container {
     display: flex;
@@ -18,7 +16,6 @@ body {
     gap: 15px;
     flex-wrap: wrap;
     margin: auto;
-
 }
 
 .container__card1 {
@@ -39,7 +36,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
 }
 
 .container__card:hover {
@@ -71,15 +67,11 @@ body {
     color: white;
 }
 
-
-
-.container__card>h1 {
+.container__card > h1 {
     font-weight: 700;
     font-size: 20px;
     color: rgb(59, 74, 142);
 }
-
-
 
 .container__description {
     padding: 5px 0;
@@ -93,7 +85,7 @@ body {
     margin: 10px;
 }
 
-.container__description>a {
+.container__description > a {
     background-color: rgb(59, 74, 142);
     padding: 10px;
     border-radius: 10px;
@@ -102,11 +94,9 @@ body {
     margin: auto;
 }
 
-.container__description>a:hover {
+.container__description > a:hover {
     background-color: #27346a;
 }
-
-
 
 .pagination {
     display: flex;
@@ -118,7 +108,6 @@ body {
     font-size: 14px;
     gap: 15px;
 }
-
 
 .subtitle {
     position: fixed;
@@ -133,7 +122,6 @@ body {
     display: flex;
     justify-content: center;
     padding: 20px;
-
 }
 
 .subt__cat {
@@ -144,19 +132,6 @@ body {
     color: rgb(59, 74, 142);
     margin-top: 70px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @media screen and (max-width: 1023px) {
     .container__card {

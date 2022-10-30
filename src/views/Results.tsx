@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import Search from '../Search'
-
+import { Search } from '@/components'
 import { truncate } from '@/utilities'
 import { QueryJob } from '@/models'
 import { queryJobByName } from '@/services'

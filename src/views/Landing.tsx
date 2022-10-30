@@ -1,4 +1,4 @@
-import { Card } from './Card'
+import { Cards } from '@/components'
 
 export function Landing() {
     return (
@@ -6,7 +6,7 @@ export function Landing() {
             <h2 className="subt__cat container__card1">
                 Elige una categoria de empleo
             </h2>
-            <Card />
+            <Cards />
         </>
     )
 }
