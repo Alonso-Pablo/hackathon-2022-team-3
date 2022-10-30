@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Category } from '@/models'
-import { getCategories } from '../../../../services'
+import { getCategories } from '@/services'
 
 export function Card() {
     const [category, setCategory] = useState<Category[]>([])

@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import Pagination from '@mui/material/Pagination'
 
 import { Search } from '../Search'
-import { QueryJob } from '../../../models'
-import { getJobsByCategory } from '../../../services'
+import { QueryJob } from '@/models'
+import { getJobsByCategory } from '@/services'
 
 export function Categories() {
     const [jobs, setJobs] = useState<QueryJob[]>([])
