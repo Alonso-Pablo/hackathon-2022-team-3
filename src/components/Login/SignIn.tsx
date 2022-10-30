@@ -1,36 +1,30 @@
+//@ts-nocheck
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { UserAuth } from '../../context/AuthContext';
 import SignInGoogle from './SignInGoogle';
 
 function SignIn() {
-  const auth = getAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
-  const email = useRef<HTMLInputElement>(null);
-  const password = useRef<HTMLInputElement>(null);
-  const [authing, setAuthing] = useState<boolean>(false);
+  const { signIn } = UserAuth();
 
   const handleSignUp = () => {
     navigate('/signup');
   };
 
-  const signIn = () => {
-    console.log('quiero entrar!');
-    setAuthing(true);
-    signInWithEmailAndPassword(
-      auth,
-      email.current!.value,
-      password.current!.value
-    )
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/');
-      })
-      .catch((err) => {
-        console.error(err);
-        setAuthing(false);
-      });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      await signIn(email, password);
+      navigate('/');
+    } catch (e) {
+      setError(e.message);
+      console.log(e.message);
+    }
   };
 
   return (
@@ -39,11 +33,11 @@ function SignIn() {
         <h2 className="text-4xl font-bold text-center mb-5 text-blue-secondary tracking-wide">
           Log in
         </h2>
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <span className="flex flex-col gap-2">
             <label>Email:</label>
             <input
-              ref={email}
+              onChange={(e) => setEmail(e.target.value)}
               type="email"
               name="email"
               placeholder="Email"
@@ -54,7 +48,7 @@ function SignIn() {
           <span className="flex flex-col gap-2">
             <label>Password:</label>
             <input
-              ref={password}
+              onChange={(e) => setPassword(e.target.value)}
               type="password"
               name="password"
               placeholder="Password"
@@ -65,8 +59,7 @@ function SignIn() {
           <span className="flex flex-col divide-y-2 divide-gray-400 gap-4">
             <span>
               <button
-                onClick={signIn}
-                  disabled={authing}
+                type="submit"
                 className="bg-blue-primary text-white px-4 py-2 rounded-lg hover:scale-105 transition duration-500 ease-in-out hover:bg-blue-secondary w-full"
               >
                 Login

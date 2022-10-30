@@ -1,18 +1,24 @@
-import React from 'react';
-import { getAuth, signOut } from 'firebase/auth';
+//@ts-nocheck
+import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext';
 
 function LogoutButton() {
-  const auth = getAuth();
+  const { logout } = UserAuth();
+  const navigate = useNavigate();
 
-  const logOut = () => {
-    signOut(auth);
-    location.reload();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/signin');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
     <button
       className="bg-blue-primary text-white px-4 py-2 rounded-lg hover:scale-105 transition duration-500 ease-in-out hover:bg-blue-secondary w-fit"
-      onClick={logOut}
+      onClick={handleLogout}
     >
       Disconnect
     </button>

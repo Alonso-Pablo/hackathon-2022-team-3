@@ -1,26 +1,30 @@
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { useState } from 'react';
+//@ts-nocheck
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext';
 import googleLogo from '../../assets/google.svg';
 
+
 function SignInGoogle() {
-  const auth = getAuth();
+  const { googleSignIn, user } = UserAuth();
   const navigate = useNavigate();
   const [authing, setAuthing] = useState<boolean>(false);
 
-  const signInGoogle = () => {
-    setAuthing(true);
-    signInWithPopup(auth, new GoogleAuthProvider())
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        navigate('/');
-      })
-      .catch((err) => {
-        console.log(err.message);
-        setAuthing(false);
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      setAuthing(true);
+      await googleSignIn();
+    } catch (error) {
+      console.log(error);
+      setAuthing(false);
+    }
   };
+
+  useEffect(() => {
+    if (user != null) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <div>
@@ -29,7 +33,7 @@ function SignInGoogle() {
       </p>
       <button
         className="text-black px-4 py-2 rounded-lg active:scale-110 transition-all duration-300 ease-in disabled:grayscale"
-        onClick={signInGoogle}
+        onClick={handleGoogleSignIn}
         disabled={authing}
       >
         <img
