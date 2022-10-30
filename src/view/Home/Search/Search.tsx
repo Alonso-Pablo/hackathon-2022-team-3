@@ -1,33 +1,42 @@
-import React from 'react';
-export interface SearchInterface { }
-import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
-const Search: React.FC<SearchInterface> = () => {
+interface Query {
+    keyword: string
+}
 
-	const history = useNavigate()
+const Search = () => {
+    const navigate = useNavigate()
 
-	const submitHandler = (e) => {
-		e.preventDefault();
-		const keyword = e.currentTarget.keyword.value.trim();
-		console.log(`ESTA ES LA KEYWORD ${keyword}`)
+    const onSubmit = ({ keyword }: Query) => {
+        console.log(`ESTA ES LA KEYWORD ${keyword}`)
+        if (keyword.length === 0) {
+            console.warn(<h5>Ingrese una busqueda...</h5>)
+        } else {
+            navigate(`/results?name=${keyword}`)
+        }
+    }
 
-		if (keyword.length === 0) {
-			console.warn(<h5>Ingrese una busqueda...</h5>)
-		} else {
-			history(`/results?name=${keyword}`)
-			e.currentTarget.keyword.value = "";
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<Query>({ mode: 'onTouched' })
 
-		}
-	}
+    return (
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <input
+                {...register('keyword', { required: true })}
+                type="text"
+                name="keyword"
+                placeholder="Buscar por palabra clave..."
+            />
 
+            <button disabled={isSubmitting} type="submit">
+                Buscar
+            </button>
+        </form>
+    )
+}
 
-	return (
-		<form onSubmit={submitHandler}>
-			<input type='text' name='keyword' placeholder='Buscar por palabra clave...' />
-
-			<button type='submit' >Buscar</button>
-		</form>
-	);
-};
-
-export default Search;
+export default Search
