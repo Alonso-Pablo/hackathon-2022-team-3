@@ -1,10 +1,10 @@
-//@ts-nocheck
-import React from 'react';
-import { UserAuth } from '../context/AuthContext';
+import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
-  const { user } = UserAuth();
+import { useUser } from '@/store';
+
+export const ProtectedRoute = ({ children }: { children: ReactNode }) => {
+  const { user } = useUser();
   const navigate = useNavigate();
 
   if (!user) {
@@ -12,5 +12,3 @@ const ProtectedRoute = ({ children }) => {
   }
   return children;
 };
-
-export default ProtectedRoute;

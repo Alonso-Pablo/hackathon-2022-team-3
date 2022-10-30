@@ -1,12 +1,21 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignUp from './components/Login/SignUp';
-import SignIn from './components/Login/SignIn';
-import Home from './views/Home';
-import { AuthContextProvider } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import AppRouter from './routes/AppRouter';
+import { useEffect } from 'react';
+
+import { useUser } from '@/store';
+import { auth } from '@/services/firebase';
+
+import { onAuthStateChanged } from 'firebase/auth';
+
+import AppRouter from '@/routes/AppRouter';
 
 function App() {
+  const { change } = useUser();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      change(currentUser);
+    });
+  }, []);
+
   return <AppRouter />;
 }
 
