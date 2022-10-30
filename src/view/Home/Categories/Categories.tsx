@@ -5,6 +5,7 @@ import Pagination from '@mui/material/Pagination'
 import { Search } from '../Search'
 import { QueryJob } from '@/models'
 import { getJobsByCategory } from '@/services'
+import { truncate } from '@/utilities'
 
 export function Categories() {
     const [jobs, setJobs] = useState<QueryJob[]>([])
@@ -30,10 +31,6 @@ export function Categories() {
                 window.scroll(0, 0)
             })
     }, [page])
-
-    function truncate(str: string, n: number) {
-        return str?.length > n ? str.substr(0, n - 1) + ' ...' : str
-    }
 
     return (
         <>
