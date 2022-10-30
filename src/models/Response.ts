@@ -1,3 +1,4 @@
 export interface Response<T> {
-    data: T
+    data: T,
+	meta: unknown
 }
