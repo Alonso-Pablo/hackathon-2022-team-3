@@ -70,6 +70,7 @@ function SignIn() {
               placeholder="Email"
               register={register('email', EMAIL_VALIDATION)}
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
+              error={errors.email}
             />
           </span>
           <span className="flex flex-col gap-2">
@@ -79,6 +80,7 @@ function SignIn() {
               placeholder="Password"
               register={register('password', PASSWORD_VALIDATION)}
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
+              error={errors.password}
             />
           </span>
           <span className="flex flex-col divide-y-2 divide-gray-400 gap-4">

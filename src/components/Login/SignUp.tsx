@@ -66,6 +66,7 @@ const SignUp = () => {
               type="email"
               placeholder="Email"
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
+              error={errors.email}
             />
           </span>
           <span className="flex flex-col gap-2">
@@ -75,6 +76,7 @@ const SignUp = () => {
               register={register('password', PASSWORD_VALIDATION)}
               placeholder="Password"
               className="px-3 py-2 rounded-md text-gray-700 focus:outline-blue-primary border-2"
+              error={errors.password}
             />
           </span>
 
