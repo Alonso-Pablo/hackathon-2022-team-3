@@ -4,7 +4,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Layout } from '@/components';
 
 const DashboardPrivateRoute = () => {
-  const Home = lazy(() => import('@/views/Home'));
+  const Home = lazy(() =>
+    import('@/views').then((module) => ({ default: module.Home }))
+  );
   return (
     <Suspense>
       <Routes>
