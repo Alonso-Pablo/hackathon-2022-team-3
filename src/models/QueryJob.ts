@@ -2,6 +2,7 @@ export interface QueryJob {
     id: string
     type: string
     attributes: {
+        description: string
         title: string
         description_headline: string
         functions_headline: string
