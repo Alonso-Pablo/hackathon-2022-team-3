@@ -1,9 +1,29 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignUp from './components/Login/SignUp';
+import SignIn from './components/Login/SignIn';
+import Home from './views/Home';
+import { AuthContextProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function App() {
-    return (
-        <div>
-            <h1 className="bg-black text-white">Hola mundo</h1>
-        </div>
-    )
+  return (
+    <BrowserRouter>
+      <AuthContextProvider>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+        </Routes>
+      </AuthContextProvider>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
