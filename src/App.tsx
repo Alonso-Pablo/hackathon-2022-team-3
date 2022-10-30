@@ -1,9 +1,30 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { initializeApp } from 'firebase/app';
+import SignUp from './components/Login/SignUp';
+import SignIn from './components/Login/SignIn';
+import Home from './views/Home';
+import { config } from './services/firebase';
+import AuthRoute from './routes/AuthRoute';
+
+initializeApp(config.firbaseConfig);
+
 function App() {
-    return (
-        <div>
-            <h1 className="bg-black text-white">Hola mundo</h1>
-        </div>
-    )
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AuthRoute>
+              <Home />
+            </AuthRoute>
+          }
+        />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
