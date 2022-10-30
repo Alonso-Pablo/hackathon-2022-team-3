@@ -1,6 +1,5 @@
-export { getCategories } from './getCategories'
-export { getJobsByCategory } from './getJobsByCategory'
-export { queryJobByName } from './queryJobByName'
+export { getJobsByCategory } from './getJobsByCategory';
+export { queryJobByName } from './queryJobByName';
 export { login } from './login';
 export { signUp } from './signUp';
 export { getCategories } from './getCategories';
