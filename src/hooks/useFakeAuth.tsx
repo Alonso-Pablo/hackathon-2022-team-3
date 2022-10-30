@@ -1,8 +1,9 @@
-import React from 'react'
-import { FakeAuthContext } from '../store/FakeAuthContext'
+import { useContext } from 'react';
+
+import { FakeAuthContext } from '@/store/FakeAuthContext';
 
 const useFakeAuth = () => {
-    return React.useContext(FakeAuthContext)
-}
+  return useContext(FakeAuthContext);
+};
 
-export default useFakeAuth
+export default useFakeAuth;
