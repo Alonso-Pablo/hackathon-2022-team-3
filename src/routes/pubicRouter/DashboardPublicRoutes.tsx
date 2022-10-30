@@ -1,11 +1,9 @@
 import { Routes, Route, Navigate } from 'react-router';
 
-import FakeLogin from '@/views/FakeLogin';
-
 const DashboardPublicRoutes = () => {
   return (
     <Routes>
-      <Route path="login" element={<FakeLogin />} />
+      <Route path="login" element={<div>Hola</div>} />
       <Route path="register" element={<h1>Register</h1>} />
       <Route path="*" element={<Navigate to="/auth" />} />
     </Routes>
