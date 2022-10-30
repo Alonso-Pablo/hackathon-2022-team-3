@@ -20,13 +20,8 @@
         "lottie-react": "^2.3.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-<<<<<<< HEAD
-        "react-icons": "^4.6.0",
-        "react-router-dom": "^6.4.2"
-=======
         "react-hook-form": "7.38.0",
         "react-router-dom": "6.4.2"
->>>>>>> 78772f68ea1b34cf6efa3b470840c3d51870df50
     },
     "devDependencies": {
         "@testing-library/jest-dom": "5.16.5",
