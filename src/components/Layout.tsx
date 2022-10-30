@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-const Layout = () => {
+export const Layout = () => {
   return (
     <div>
       <nav className="border-y-2">
@@ -22,5 +21,3 @@ const Layout = () => {
     </div>
   );
 };
-
-export default Layout;
