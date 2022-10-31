@@ -7,6 +7,7 @@ import { Field, Button } from '@/components';
 import SignInGoogle from './SignInGoogle';
 import { Login } from '@/models';
 import { signUp } from '@/services';
+import Spinner from '../Spinner';
 
 const EMAIL_VALIDATION: RegisterOptions<Login> = {
   minLength: { value: 4, message: 'Password must be at least 4 characters' },
@@ -40,12 +41,15 @@ const SignUp = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<Login>({ mode: 'onTouched' });
-
+  const [isloading, setIsloading] = useState(false);
   const onSubmit = async ({ email, password }: Login) => {
     try {
+      setIsloading(true);
       await signUp(email, password);
+      setIsloading(false);
       navigate('/');
     } catch (e) {
+      setIsloading(false);
       console.log(e);
       /*  setError(e.message);
       console.log(e.message); */
@@ -105,6 +109,7 @@ const SignUp = () => {
               </p>
             </span>
           </span>
+          {isloading && <Spinner />}
         </form>
       </div>
     </div>
