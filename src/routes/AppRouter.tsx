@@ -11,15 +11,15 @@ const AppRouter = () => {
     <BrowserRouter>
       <AuthContextProvider>
         <Routes>
-          {/*<Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />*/}
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
 
           <Route
             path="/*"
             element={
-              //<PrivateRouter>
+              <PrivateRouter>
                 <DashboardPrivateRoute />
-              //</PrivateRouter>
+              </PrivateRouter>
             }
           />
         </Routes>

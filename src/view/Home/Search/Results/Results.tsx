@@ -75,7 +75,7 @@ const Results: React.FC<ResultsInterface> = () => {
           count={10}
           variant="outlined"
           shape="rounded"
-          onChange={(e) => handleChange(e.target.textContent)}
+          onChange={(e: any) => handleChange(e.target.textContent)}
         />
       </div>
 

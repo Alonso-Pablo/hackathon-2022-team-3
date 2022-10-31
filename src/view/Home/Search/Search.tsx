@@ -22,13 +22,17 @@ const Search: React.FC<SearchInterface> = () => {
     <>
       <div className="search__container">
         <hr />
-        <p>Prefieres buscar por palabra clave...?</p>
+
         <form className="search__form" onSubmit={submitHandler}>
-          <input
-            type="text"
-            name="keyword"
-            placeholder="Buscar por palabra clave..."
-          />
+          <div className="search__form-input-cont">
+            <p>Prefieres buscar por palabra clave...?</p>
+            <input
+              className="search__form-input"
+              type="text"
+              name="keyword"
+              placeholder="Buscar por palabra clave..."
+            />
+          </div>
 
           <button type="submit">Buscar</button>
         </form>

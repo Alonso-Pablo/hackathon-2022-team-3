@@ -94,7 +94,7 @@ const Categories: React.FC<CategoriesInterface> = () => {
           count={cantPages}
           variant="outlined"
           shape="rounded"
-          onChange={(e) => handleChange(e.target.textContent)}
+          onChange={(e: any) => handleChange(e.target.textContent)}
         />
       </div>
 
