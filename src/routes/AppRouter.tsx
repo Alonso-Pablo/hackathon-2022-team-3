@@ -2,7 +2,6 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 
 import SignIn from '@/components/Login/SignIn';
 import SignUp from '@/components/Login/SignUp';
-import { ProtectedRoute } from '@/components';
 
 import DashboardPrivateRoute from './privateRouter/DashboardPrivateRoute';
 import PrivateRouter from './privateRouter/PrivateRouter';
@@ -15,7 +14,7 @@ const AppRouter = () => {
         <Route path="/signin" element={<SignIn />} />
 
         <Route
-          path="/*"
+          path="*"
           element={
             <PrivateRouter>
               <DashboardPrivateRoute />
