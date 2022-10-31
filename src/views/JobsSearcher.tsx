@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 
 import { QueryJob } from '@/models';
-import { getJobsByCategory } from '@/services';
 import { truncate } from '@/utilities';
 import { getAllFilteredJobs } from '@/services/jobsService/getAllFilteredJobs';
 
@@ -16,16 +15,16 @@ export function JobsSearcher() {
     setPage(page);
   };
 
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     setIsFetching(true);
     const getJobs = async () => {
-      const params = Object.fromEntries(searchParams.entries())
+      const params = Object.fromEntries(searchParams.entries());
       const response = await getAllFilteredJobs(params, page);
       setJobs(response);
       setIsFetching(false);
-    }
+    };
     getJobs();
   }, [searchParams, page]);
 
@@ -34,9 +33,15 @@ export function JobsSearcher() {
       <article className="container">
         {jobs.map((job, i) => {
           return (
-            <div key={i} className="container__card" id={job.id}>
-              <h1>{job.attributes.title}</h1>
-              <div className="container__description">
+            <div
+              key={i}
+              className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              id={job.id}
+            >
+              <h1 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                {job.attributes.title}
+              </h1>
+              <div className="font-normal text-gray-700 dark:text-gray-400">
                 <p className="container__description-title">Descripcion:</p>
                 <p
                   dangerouslySetInnerHTML={{
@@ -47,6 +52,7 @@ export function JobsSearcher() {
 
               <div className="container__description">
                 <a
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-center"
                   href={job.links.public_url}
                   target="blank"
                   rel="noopener noreferrer"
