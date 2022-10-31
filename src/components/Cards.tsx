@@ -32,7 +32,7 @@ export function Cards() {
   return (
     <>
       {selectOptions?.category && (<Select text="Category" options={selectOptions?.category} onChange={(selected) => handleFilter({ category: selected })} />)}
-      {selectOptions?.seniority && (<Select name text="Seniority" options={selectOptions?.seniority} onChange={(selected) => handleFilter({ seniority: selected })} />)}
+      {selectOptions?.seniority && (<Select by='locale_key' text="Seniority" options={selectOptions?.seniority} onChange={(selected) => handleFilter({ seniority: selected })} />)}
     </>
   );
 

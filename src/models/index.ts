@@ -1,4 +1,4 @@
-export type { Category } from './BaseModels/Category';
+export type { Category } from './FilterBaseModels/Category';
 export type { Responses } from './Responses';
 export type { Response } from './Response';
 export type { CategoryJob } from './CategoryJob';

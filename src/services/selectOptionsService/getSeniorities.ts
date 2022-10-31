@@ -1,5 +1,5 @@
 import { Response } from '@/models'
-import { Seniority } from '@/models/BaseModels'
+import { Seniority } from '@/models/FilterBaseModels'
 import axiosClient from '../apiConfig'
 
 export const getSeniorities = async (

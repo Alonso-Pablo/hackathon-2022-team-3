@@ -1,23 +1,24 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { Category } from '@/models';
-import { Seniority } from '@/models/BaseModels';
+import { FilterAttributes, FilterBase } from '@/models/FilterBaseModels';
 
-export function Select({
-  options,
-  onChange,
-  text,
-  name,
-}: {
-  text?: string;
-  options: Category[] | Seniority[];
-  onChange: (id: string) => void;
-  name?: any;
-}) {
+
+interface SelectProps<T> {
+  text?: string
+  options: T
+  onChange: (id: string) => void
+  by?: keyof FilterAttributes
+}
+
+export function Select<T extends Array<FilterBase>>({options, onChange, text, by}: SelectProps<T>) {
   const [selected, setSelected] = useState(options[0]);
 
   useEffect(() => {
-    onChange(name ? selected.attributes.name : selected.id );
+    const filterBy = by && selected.attributes[by]
+    const id = selected && selected.id
+
+    onChange(filterBy || id);
+
   }, [selected]);
 
   return (
