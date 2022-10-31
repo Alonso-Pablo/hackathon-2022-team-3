@@ -193,4 +193,23 @@ body {
     align-items: center;
     text-align: center;
   }
+
+  .subtitle {
+    text-align: center;
+  }
+
+  .subt__cat {
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  .card__cat {
+    text-align: center;
+    width: 100%;
+      }
+
+  .card__cat > h1 {
+text-align: center;
+width: 100%;
+  }
 }

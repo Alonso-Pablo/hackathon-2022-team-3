@@ -81,9 +81,11 @@ const Results: React.FC<ResultsInterface> = () => {
 
       <Search />
 
-      <Link to={`/`} className="card__cat">
-        <h1>Volver al inicio</h1>
-      </Link>
+      <article className="container ">
+        <Link to={`/`} className="card__cat">
+          <h1>Volver al inicio</h1>
+        </Link>
+      </article>
       <br></br>
     </>
   );

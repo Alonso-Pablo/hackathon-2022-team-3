@@ -99,10 +99,11 @@ const Categories: React.FC<CategoriesInterface> = () => {
       </div>
 
       <Search />
-
-      <Link to={`/`} className="card__cat">
-        <h1>Volver al inicio</h1>
-      </Link>
+      <article className="container ">
+        <Link to={`/`} className="card__cat">
+          <h1>Volver al inicio</h1>
+        </Link>
+      </article>
       <br></br>
     </>
   );
