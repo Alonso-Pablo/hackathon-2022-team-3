@@ -17,7 +17,6 @@ export const Layout = () => {
           </li>
         </ul>
       </nav>
-      <Outlet />
     </div>
   );
 };

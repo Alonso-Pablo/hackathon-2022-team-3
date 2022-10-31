@@ -10,9 +10,9 @@ export function Home() {
       default: module.Landing,
     }))
   );
-  const Categories = lazy(() =>
+  const JobsByCategory = lazy(() =>
     import('@/views').then((module) => ({
-      default: module.Categories,
+      default: module.JobsByCategory,
     }))
   );
   const Results = lazy(() =>
@@ -28,9 +28,11 @@ export function Home() {
       </h2>
       <Suspense fallback={''}>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/results" element={<Results />} />
+          <Route path="*" element={<Landing />}>
+            <Route path="categories/:id" element={<JobsByCategory />} />
+            {/* <Route path="*" element={<JobsByCategory />} /> */}
+          </Route>
+          {/*  <Route path="/results" element={<Results />} /> */}
         </Routes>
       </Suspense>
     </>

@@ -9,7 +9,7 @@ type PrivateProps = {
 const PrivateRouter: FunctionComponent<PrivateProps> = ({ children }) => {
   const { user } = useUser();
   console.log('user', user);
-  return user ? children : <Navigate to="/signin" />;
+  return user ? children : <Navigate to={user ? '/' : '/signin'} />;
 };
 
 export default PrivateRouter;

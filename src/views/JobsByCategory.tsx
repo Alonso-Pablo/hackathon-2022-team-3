@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 
-import { Search } from '@/components';
 import { QueryJob } from '@/models';
 import { getJobsByCategory } from '@/services';
 import { truncate } from '@/utilities';
 
-export function Categories() {
+export function JobsByCategory() {
   const [jobs, setJobs] = useState<QueryJob[]>([]);
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
@@ -16,26 +15,20 @@ export function Categories() {
     setPage(page);
   };
 
-  const query = new URLSearchParams(window.location.search);
-
-  const category = query.get('categoryID') as string;
-  console.log(category);
+  const { id } = useParams();
 
   useEffect(() => {
     setIsFetching(true);
 
-    getJobsByCategory(category, 9, page)
+    getJobsByCategory(id as string, 9, page)
       .then((res) => setJobs(res.data))
       .finally(() => {
         setIsFetching(false);
-        window.scroll(0, 0);
       });
-  }, [page]);
+  }, [page, id]);
 
   return (
     <>
-      <h2 className="subt__cat">Empleos con la categoria {category}</h2>
-
       <article className="container">
         {jobs.map((job, i) => {
           return (
@@ -75,12 +68,6 @@ export function Categories() {
           onChange={(e, page) => handleChange(page)}
         />
       </div>
-
-      <Search />
-
-      <Link to="/" className="card__cat">
-        <h1>Volver al inicio</h1>
-      </Link>
     </>
   );
 }
