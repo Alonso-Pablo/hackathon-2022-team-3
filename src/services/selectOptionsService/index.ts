@@ -1,3 +1,5 @@
 export * from './getCategories'
 export * from './getCompanies'
+export * from './getModalities'
+export * from './getPerks'
 export * from './getSeniorities'
