@@ -1,20 +1,23 @@
 import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Category } from '@/models';
+import { Seniority } from '@/models/BaseModels';
 
 export function Select({
   options,
   onChange,
   text,
+  name,
 }: {
   text?: string;
-  options: Category[];
+  options: Category[] | Seniority[];
   onChange: (id: string) => void;
+  name?: any;
 }) {
   const [selected, setSelected] = useState(options[0]);
 
   useEffect(() => {
-    onChange(selected.id);
+    onChange(name ? selected.attributes.name : selected.id );
   }, [selected]);
 
   return (

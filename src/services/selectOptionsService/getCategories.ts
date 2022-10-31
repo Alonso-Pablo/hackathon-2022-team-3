@@ -1,5 +1,5 @@
 import { Category, Response } from '@/models'
-import axiosClient from './apiConfig'
+import axiosClient from '../apiConfig'
 
 export const getCategories = async (
     perPage = 100

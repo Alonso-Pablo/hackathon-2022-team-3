@@ -1,44 +1,39 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 
-import { Category } from '@/models';
 import { getCategories } from '@/services';
 import { Select } from '@/components';
+import { useSearchParams } from "react-router-dom";
+import { SelectOptionsModel } from '@/models/selectOptionsModel';
+import { FilterModel } from '@/models/FilterModel';
+import { getSeniorities } from '@/services/selectOptionsService';
 
 export function Cards() {
-  const [category, setCategory] = useState<Category[]>([]);
-  const navigate = useNavigate();
+  const [selectOptions, setSelectOptions] = useState<SelectOptionsModel>({});
+  const [filterParams, setFilterParams] = useState<FilterModel>({});
+  const [_, setSearchParams] = useSearchParams();
 
-  const handleFiltre = (id: string) => {
-    navigate(`/categories/${id}`);
+  const handleFilter = (param: { category?: string, seniority?: string }) => {
+    const newParams = { ...filterParams, ...param };
+    setSearchParams(newParams);
+    setFilterParams(newParams);
   };
 
   useEffect(() => {
-    getCategories().then((response) => setCategory(response.data));
+    const getInitialFilters = async () => {
+      const categoryResponse = await Promise.all([getCategories(), getSeniorities()])
+      setSelectOptions({
+        category: categoryResponse[0].data,
+        seniority: categoryResponse[1].data
+      });
+    }
+    getInitialFilters()
   }, []);
 
   return (
     <>
-      {/*  <Search /> */}
-      {category.length !== 0 && (
-        <Select text="Category" options={category} onChange={handleFiltre} />
-      )}
+      {selectOptions?.category && (<Select text="Category" options={selectOptions?.category} onChange={(selected) => handleFilter({ category: selected })} />)}
+      {selectOptions?.seniority && (<Select name text="Seniority" options={selectOptions?.seniority} onChange={(selected) => handleFilter({ seniority: selected })} />)}
     </>
   );
 
-  /* return (
-    <article className="container">
-      {category.map((category) => {
-        return (
-          <Link
-            to={`/categories/${category.id}`}
-            className="card__cat"
-            id={category.id}
-          >
-            <h1>{category.attributes.name}</h1>
-          </Link>
-        );
-      })}
-    </article>
-  ); */
 }

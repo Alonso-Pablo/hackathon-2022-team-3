@@ -10,9 +10,9 @@ export function Home() {
       default: module.Landing,
     }))
   );
-  const JobsByCategory = lazy(() =>
+  const JobsSearcher = lazy(() =>
     import('@/views').then((module) => ({
-      default: module.JobsByCategory,
+      default: module.JobsSearcher,
     }))
   );
   const Results = lazy(() =>
@@ -29,34 +29,12 @@ export function Home() {
       <Suspense fallback={''}>
         <Routes>
           <Route path="*" element={<Landing />}>
-            <Route path="categories/:id" element={<JobsByCategory />} />
-            {/* <Route path="*" element={<JobsByCategory />} /> */}
+            <Route path="*" element={<JobsSearcher />} />
           </Route>
-          {/*  <Route path="/results" element={<Results />} /> */}
+           <Route path="/results" element={<Results />} />
+
         </Routes>
       </Suspense>
     </>
   );
 }
-/*
-import { useLottie } from 'lottie-react';
-import homeAnimation from '@/assets/home.json';
-import { LogoutButton } from '@/components';
-
-export default function Home() {
-  const options = {
-    animationData: homeAnimation,
-    loop: true,
-  };
-
-  const { View } = useLottie(options);
-
-  return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-5xl font-bold">This is the Home</h1>
-      <div className="h-32 w-32">{View}</div>
-      <LogoutButton />
-    </div>
-  );
-}
-*/

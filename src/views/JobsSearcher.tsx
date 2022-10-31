@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Pagination from '@mui/material/Pagination';
 
 import { QueryJob } from '@/models';
 import { getJobsByCategory } from '@/services';
 import { truncate } from '@/utilities';
+import { getAllFilteredJobs } from '@/services/jobsService/getAllFilteredJobs';
 
-export function JobsByCategory() {
+export function JobsSearcher() {
   const [jobs, setJobs] = useState<QueryJob[]>([]);
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
@@ -15,17 +16,18 @@ export function JobsByCategory() {
     setPage(page);
   };
 
-  const { id } = useParams();
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     setIsFetching(true);
-
-    getJobsByCategory(id as string, 9, page)
-      .then((res) => setJobs(res.data))
-      .finally(() => {
-        setIsFetching(false);
-      });
-  }, [page, id]);
+    const getJobs = async () => {
+      const params = Object.fromEntries(searchParams.entries())
+      const response = await getAllFilteredJobs(params, page);
+      setJobs(response);
+      setIsFetching(false);
+    }
+    getJobs();
+  }, [searchParams, page]);
 
   return (
     <>
@@ -36,7 +38,6 @@ export function JobsByCategory() {
               <h1>{job.attributes.title}</h1>
               <div className="container__description">
                 <p className="container__description-title">Descripcion:</p>
-                {/*<p>{truncate(el.attributes.description, 150)}</p>*/}
                 <p
                   dangerouslySetInnerHTML={{
                     __html: truncate(job.attributes.description, 150),
