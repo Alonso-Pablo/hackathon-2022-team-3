@@ -1,81 +1,92 @@
-import React from 'react';
-export interface ResultsInterface { }
+export interface ResultsInterface {}
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Search from '../Search';
-import Pagination from '@mui/material/Pagination';
-
+import { Link } from 'react-router-dom';
+import { Pagination } from '@mui/material';
 
 const Results: React.FC<ResultsInterface> = () => {
+  let query = new URLSearchParams(window.location.search);
 
-	let query = new URLSearchParams(window.location.search);
+  let keyword = query.get('key');
 
-	//console.log(query)
+  const [results, setResults] = useState([]);
+  const [page, setPage] = useState(1);
 
-	let keyword = query.get('name');
+  const handleChange = (p: number) => {
+    setPage(p);
+    window.scroll(0, 0);
+  };
 
-	//console.log(keyword);
+  const urlNew = `https://www.getonbrd.com/api/v0/search/jobs?query=${keyword}&per_page=9&page=${page}`;
 
-	const [results, setResults] = useState([]);
+  useEffect(() => {
+    const endPoint = urlNew;
+    //console.log(endPoint)
+    axios.get(endPoint).then((response) => {
+      const jobData = response.data;
+      const jobAt = jobData.data;
+      console.log(jobAt);
+      setResults(jobAt);
+    });
+  }, [results]);
 
-	useEffect(() => {
-		const endPoint = `https://www.getonbrd.com/api/v0/search/jobs?query=${keyword}`
-		//console.log(endPoint)
-		axios.get(endPoint)
-			.then(response => {
-				const jobData = response.data;
-				const jobAt = jobData.data;
-				console.log(jobAt);
+  function truncate(str: string, n: number) {
+    return str?.length > n ? str.substr(0, n - 1) + ' ...' : str;
+  }
 
-				setResults(jobAt)
-			})
+  return (
+    <>
+      <h2 className="subt__cat">
+        Empleos encontrados para la busqueda: {keyword}
+      </h2>
 
-	}, [setResults]);
+      <article className="container">
+        {results.map((el: any, i: any) => {
+          return (
+            <div key={i} className="container__card">
+              <h1>{el.attributes.title}</h1>
+              <div className="container__description">
+                <p className="container__description-title">Descripcion:</p>
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: truncate(el.attributes.description, 150),
+                  }}
+                ></p>
+              </div>
 
-	function truncate(str, n) {
-		return str?.length > n ? str.substr(0, n - 1) + " ..." : str;
+              <div className="container__description">
+                <a
+                  href={el.links.public_url}
+                  target="blank"
+                  rel="noopener noreferrer"
+                >
+                  Visita esta oferta en GetOnBoard
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </article>
 
-	}
+      <div className="pagination">
+        <p>Estas en la pagina {page}</p>
+        <Pagination
+          count={10}
+          variant="outlined"
+          shape="rounded"
+          onChange={(e) => handleChange(e.target.textContent)}
+        />
+      </div>
 
+      <Search />
 
-	return (
-		<>
-
-			<h2 className='subt__cat'>Empleos encontrados para la busqueda: {results}</h2>
-
-
-			<article className='container'>
-				{
-					results.map((el, i) => {
-						return (
-							<div key={i} className='container__card'>
-
-								<h1>{el.attributes.title}</h1>
-								<div className='container__description'>
-									<p className='container__description-title'>Descripcion:</p>
-									{/*<p>{truncate(el.attributes.description, 150)}</p>*/}
-									<p dangerouslySetInnerHTML={{ __html: truncate(el.attributes.description, 150) }}></p>
-								</div>
-
-
-
-
-
-								<div className='container__description'>
-									<a href={el.links.public_url} target='blank' rel='noopener noreferrer'>Visita esta oferta en GetOnBoard</a>
-								</div>
-							</div>
-						)
-					})
-				}
-
-			</article>
-
-
-
-			<Search />
-		</>
-	);
+      <Link to={`/`} className="card__cat">
+        <h1>Volver al inicio</h1>
+      </Link>
+      <br></br>
+    </>
+  );
 };
 
 export default Results;

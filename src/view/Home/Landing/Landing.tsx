@@ -1,14 +1,8 @@
-import React from 'react';
-
 import { Card } from './Card';
-export interface LandingInterface { }
+export interface LandingInterface {}
 
 const Landing: React.FC<LandingInterface> = () => {
-	return (
-
-		<Card />
-
-	);
+  return <Card />;
 };
 
 export default Landing;
