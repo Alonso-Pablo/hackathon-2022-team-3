@@ -8,6 +8,7 @@ import { Field, Button } from '@/components';
 
 import { Login } from '@/models';
 import { login } from '@/services';
+import Spinner from '../Spinner';
 
 const EMAIL_VALIDATION: RegisterOptions<Login> = {
   minLength: { value: 4, message: 'Password must be at least 4 characters' },
@@ -33,6 +34,7 @@ const PASSWORD_VALIDATION: RegisterOptions<Login> = {
 function SignIn() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const [isloading, setIsloading] = useState(false);
 
   const handleSignUp = () => {
     navigate('/signup');
@@ -47,9 +49,12 @@ function SignIn() {
   const onSubmit = async ({ email, password }: Login) => {
     setError('');
     try {
+      setIsloading(true);
       await login(email, password);
+      setIsloading(false);
       navigate('/');
     } catch (e) {
+      setIsloading(false);
       /* console.log(e);
       setError(e?.message);
       console.log(e?.message); */
@@ -108,6 +113,7 @@ function SignIn() {
               </p>
             </span>
           </span>
+          {isloading && <Spinner />}
         </form>
       </div>
     </div>
