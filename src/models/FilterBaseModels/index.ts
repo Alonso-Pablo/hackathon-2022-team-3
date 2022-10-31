@@ -1,3 +1,6 @@
 export * from './Category'
+export * from './Company'
 export * from './FilterBase'
+export * from './Modality'
+export * from './Perk'
 export * from './Seniority'
