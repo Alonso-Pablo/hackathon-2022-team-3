@@ -10,6 +10,8 @@ const Categories: React.FC<CategoriesInterface> = () => {
   const [jobs, setJobs] = useState([]);
   const [page, setPage] = useState(1);
 
+  const [cantPages, setCantPages] = useState(0);
+
   const handleChange = (p: number) => {
     setPage(p);
     window.scroll(0, 0);
@@ -22,8 +24,6 @@ const Categories: React.FC<CategoriesInterface> = () => {
 
   const APIGet = `https://www.getonbrd.com/api/v0/categories/${category}/jobs?per_page=9&page=${page}`;
 
-  //console.log(APIGet)
-
   useEffect(() => {
     const endPoint = APIGet;
     axios.get(endPoint).then((response) => {
@@ -33,6 +33,23 @@ const Categories: React.FC<CategoriesInterface> = () => {
       setJobs(apiAt);
     });
   }, [page]);
+
+  const APIcompleta = `https://www.getonbrd.com/api/v0/categories/${category}/jobs`;
+
+  useEffect(() => {
+    const endPoint = APIcompleta;
+    axios.get(endPoint).then((response) => {
+      const apiData = response.data;
+      const apiAt = apiData.data;
+      //console.log(apiAt)
+      const apiAtL = apiAt.length;
+      console.log(apiAtL);
+      const paginas = apiAtL / 9;
+      const paginasMath = Math.ceil(paginas);
+      console.log(paginasMath);
+      setCantPages(paginasMath);
+    });
+  }, [setCantPages]);
 
   function truncate(str: string, n: number) {
     return str?.length > n ? str.substr(0, n - 1) + ' ...' : str;
@@ -74,7 +91,7 @@ const Categories: React.FC<CategoriesInterface> = () => {
       <div className="pagination">
         <p>Estas en la pagina {page}</p>
         <Pagination
-          count={10}
+          count={cantPages}
           variant="outlined"
           shape="rounded"
           onChange={(e) => handleChange(e.target.textContent)}
