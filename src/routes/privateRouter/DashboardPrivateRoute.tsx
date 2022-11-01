@@ -4,6 +4,8 @@ import { Route, Routes, Link } from 'react-router-dom';
 import { Header, LogoutButton } from '@/components';
 import { Home } from '@/views';
 
+import logo from '@/assets/shovel.png';
+
 const DashboardPrivateRoute = () => {
   return (
     <>
@@ -12,7 +14,7 @@ const DashboardPrivateRoute = () => {
           <div className="container flex flex-wrap justify-between items-center mx-auto">
             <Link to="/" className="flex items-center">
               <img
-                src="src/assets/shovel.png"
+                src={logo}
                 className="mr-3 h-6 sm:h-9"
                 alt="AgarraLaPala Logo"
               />
