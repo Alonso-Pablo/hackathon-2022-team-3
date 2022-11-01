@@ -22,6 +22,7 @@ export function JobsSearcher() {
     const getJobs = async () => {
       const params = Object.fromEntries(searchParams.entries());
       const response = await getAllFilteredJobs(params, page);
+      window.scrollTo(0, 0);
       setJobs(response);
       setIsFetching(false);
     };
@@ -67,7 +68,7 @@ export function JobsSearcher() {
 
       <div className="pagination">
         <Pagination
-          count={10}
+          count={9}
           variant="outlined"
           shape="rounded"
           disabled={isFetching}
