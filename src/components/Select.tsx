@@ -25,7 +25,7 @@ export function Select<T extends Array<FilterBase>>({
   }, [selected]);
 
   return (
-    <div className="w-72">
+    <div className="w-60">
       <Listbox value={selected} onChange={setSelected}>
         <Listbox.Label className="text-gray-800 dark:text-gray-200">
           {text}
