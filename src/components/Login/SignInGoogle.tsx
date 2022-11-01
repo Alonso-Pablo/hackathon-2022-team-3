@@ -29,11 +29,11 @@ function SignInGoogle() {
 
   return (
     <div>
-      <p className="text-gray-500 text-center text-sm pt-2">
+      <p className="text-gray-500 text-center text-sm pt-2 dark:text-gray-50">
         You can log-in google
       </p>
       <Button
-        className="text-black px-4 py-2 rounded-lg active:scale-110 transition-all duration-300 ease-in disabled:grayscale"
+        className="px-4 py-2 rounded-lg active:scale-110 transition-all duration-300 ease-in disabled:grayscale dark:bg-gray-800"
         onClick={handleGoogleSignIn}
         disabled={authing}
       >

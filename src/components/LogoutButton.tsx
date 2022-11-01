@@ -1,10 +1,17 @@
+import { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components';
 
 import { logOut } from '@/services';
 
-export function LogoutButton() {
+export function LogoutButton({
+  className = 'bg-blue-primary text-white px-4 py-2 rounded-lg hover:scale-105 transition duration-500 ease-in-out hover:bg-blue-secondary w-fit',
+  children,
+}: {
+  className?: string;
+  children?: string | ReactNode;
+}) {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,11 +24,8 @@ export function LogoutButton() {
   };
 
   return (
-    <Button
-      className="bg-blue-primary text-white px-4 py-2 rounded-lg hover:scale-105 transition duration-500 ease-in-out hover:bg-blue-secondary w-fit"
-      onClick={handleLogout}
-    >
-      Disconnect
+    <Button className={className} onClick={handleLogout}>
+      {children}
     </Button>
   );
 }

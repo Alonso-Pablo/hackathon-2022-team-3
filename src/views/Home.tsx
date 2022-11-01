@@ -23,7 +23,7 @@ export function Home() {
 
   return (
     <>
-      <h2 className="subtitle">
+      <h2 className="text-xl text-center font-semibold whitespace-nowrap dark:text-white">
         Ofertas de Empleo disponibles en AgarraLaPala
       </h2>
       <Suspense fallback={''}>
@@ -31,8 +31,7 @@ export function Home() {
           <Route path="*" element={<Landing />}>
             <Route path="*" element={<JobsSearcher />} />
           </Route>
-           <Route path="/results" element={<Results />} />
-
+          <Route path="/results" element={<Results />} />
         </Routes>
       </Suspense>
     </>
