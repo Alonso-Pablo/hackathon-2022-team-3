@@ -14,14 +14,6 @@ const darkTheme = createTheme({
   },
 });
 
-/* if (
-  )
-) {
-  document.documentElement.classList.add('dark');
-} else {
-  document.documentElement.classList.remove('dark');
-} */
-
 const AppRouter = () => {
   return (
     <BrowserRouter>
