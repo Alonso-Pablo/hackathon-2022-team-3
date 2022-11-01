@@ -9,8 +9,10 @@ export function Field({
   error,
   type,
   className,
+  labelClasses = 'grid gap-1 text-gray-800 dark:text-gray-200',
   text,
 }: {
+  labelClasses?: string;
   text?: string;
   className?: string;
   placeholder?: string;
@@ -19,7 +21,7 @@ export function Field({
   error?: FieldError;
 }) {
   return (
-    <label className="grid gap-1">
+    <label className={labelClasses}>
       {text}
       <Input
         className={className}
@@ -27,7 +29,7 @@ export function Field({
         register={register}
         type={type}
       />
-      {error && <span className="text-red-700 ">{error.message}</span>}
+      {error && <span className="text-red-700">{error.message}</span>}
     </label>
   );
 }
