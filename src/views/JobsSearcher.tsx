@@ -66,7 +66,6 @@ export function JobsSearcher() {
       </article>
 
       <div className="pagination">
-        <p>Estás en la página {page}</p>
         <Pagination
           count={10}
           variant="outlined"
