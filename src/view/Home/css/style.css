@@ -187,6 +187,59 @@ body {
   gap: 10px;
 }
 
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(39, 52, 106, 0.9);
+  z-index: 10;
+  padding-top: 20px;
+}
+
+.modal__cont {
+  width: 80%;
+  background-color: white;
+  margin: auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  cursor: auto;
+}
+
+.modal__cont:hover {
+  transform: none;
+}
+
+.modal__close {
+  background-color: rgb(59, 74, 142);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  margin: auto;
+}
+
+.modal__close:hover {
+  background-color: #27346a;
+}
+
+.modal__principal-button {
+  background-color: rgb(59, 74, 142);
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  border: none;
+  margin: auto;
+}
+
+.modal__principal-button:hover {
+  background-color: #27346a;
+}
+
 @media screen and (max-width: 1023px) {
   .container__card {
     width: 90vw;
@@ -206,10 +259,10 @@ body {
   .card__cat {
     text-align: center;
     width: 100%;
-      }
+  }
 
   .card__cat > h1 {
-text-align: center;
-width: 100%;
+    text-align: center;
+    width: 100%;
   }
 }

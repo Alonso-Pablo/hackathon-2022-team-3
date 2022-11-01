@@ -12,6 +12,14 @@ const Categories: React.FC<CategoriesInterface> = () => {
 
   const [cantPages, setCantPages] = useState(0);
 
+  const [modal, setModal] = useState([]);
+  const [modalTogle, setModalTogle] = useState(false);
+
+  const changeModal = (el: never) => {
+    setModal([el]);
+    setModalTogle(!modalTogle);
+  };
+
   const handleChange = (p: number) => {
     setPage(p);
     window.scroll(0, 0);
@@ -75,13 +83,12 @@ const Categories: React.FC<CategoriesInterface> = () => {
               </div>
 
               <div className="container__description">
-                <a
-                  href={el.links.public_url}
-                  target="blank"
-                  rel="noopener noreferrer"
+                <button
+                  className="modal__principal-button"
+                  onClick={() => changeModal(el)}
                 >
-                  Visita esta oferta en GetOnBoard
-                </a>
+                  Ver detalles
+                </button>
               </div>
             </div>
           );
@@ -105,6 +112,52 @@ const Categories: React.FC<CategoriesInterface> = () => {
         </Link>
       </article>
       <br></br>
+      {modalTogle && (
+        <div className="modal" onClick={changeModal}>
+          {modal.map((pop: any) => {
+            return (
+              <>
+                <div
+                  className="container__card modal__cont"
+                  //onClick={(e) => e.stopPropagation()}
+                >
+                  <h1>{pop.attributes.title}</h1>
+                  <div className="container__description">
+                    <p className="container__description-title">Descripcion:</p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: pop.attributes.description,
+                      }}
+                    ></p>
+                    <br></br>
+                    <p className="container__description-title">Beneficios:</p>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: pop.attributes.benefits,
+                      }}
+                    ></p>
+
+                    <br></br>
+                    <div className="container__description">
+                      <a
+                        href={pop.links.public_url}
+                        target="blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver mas de esta oferta en GetOnBoard
+                      </a>
+                      <br></br>
+                      <button onClick={changeModal} className="modal__close">
+                        Cerrar Modal
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            );
+          })}
+        </div>
+      )}
     </>
   );
 };
