@@ -5,7 +5,7 @@ export async function getJobsByCategory(
     category: string,
     page: number
 ): Promise<Response<QueryJob[]>> {
-    const perPage = 10
+    const perPage = 9
     const jobs = await axiosClient.get(
         `/categories/${category}/jobs?per_page=${perPage}&page=${page}`
     )
