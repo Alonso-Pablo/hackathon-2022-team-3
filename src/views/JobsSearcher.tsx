@@ -32,7 +32,7 @@ export function JobsSearcher() {
   return (
     <>
       <div className="pagination">
-        <p>Estas en la pagina {page}</p>
+        <p className='text-white font-bold'>Estas en la pagina {page}</p>
         <Pagination
           count={9}
           variant="outlined"
@@ -76,15 +76,6 @@ export function JobsSearcher() {
         })}
       </article>
 
-      <div className="pagination">
-        <Pagination
-          count={9}
-          variant="outlined"
-          shape="rounded"
-          disabled={isFetching}
-          onChange={(e, page) => handleChange(page)}
-        />
-      </div>
     </>
   );
 }
