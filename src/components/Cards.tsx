@@ -69,7 +69,7 @@ export function Cards() {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex justify-center px-20 flex-wrap gap-4">
       {selectOptions?.category && (
         <Select
           text="Categoría"
