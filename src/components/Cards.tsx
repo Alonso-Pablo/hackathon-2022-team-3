@@ -69,7 +69,7 @@ export function Cards() {
   }, []);
 
   return (
-    <div className="flex justify-center px-20 flex-wrap gap-4">
+    <div className="flex justify-center p-10 flex-wrap gap-4">
       {selectOptions?.category && (
         <Select
           text="Categoría"
@@ -107,7 +107,7 @@ export function Cards() {
           onChange={(selected) => handleFilter({ perks: selected })}
         />
       )}
-      <Field text="País" register={register('location', { required: true })} />
+      {/*<Field text="País" register={register('location', { required: true })} />*/}
     </div>
   );
 }

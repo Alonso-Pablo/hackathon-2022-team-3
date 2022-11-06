@@ -31,6 +31,16 @@ export function JobsSearcher() {
 
   return (
     <>
+      <div className="pagination">
+        <p>Estas en la pagina {page}</p>
+        <Pagination
+          count={9}
+          variant="outlined"
+          shape="rounded"
+          disabled={isFetching}
+          onChange={(e, page) => handleChange(page)}
+        />
+      </div>
       <article className="container">
         {jobs.map((job, i) => {
           return (
